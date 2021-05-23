@@ -28,22 +28,47 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                            @{
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
+                                }
+                            }
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                            @{
+                                @if (User.IsInRole("Admin,Student,Instructor"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Courses" asp-action="Index">Courses</a>
+                                }
+                            }
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Instructors" asp-action="Index">Instructors</a>
+                            @{
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Instructors" asp-action="Index">Instructors</a>
+                                }
+                            }
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Departments" asp-action="Index">Departments</a>
+                            @{
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Departments" asp-action="Index">Departments</a>
+                                }
+                            }
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Gerer Les Roles</a>
+                            @{
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Gerer Les Roles</a>
+                                }
+                            }
                         </li>
                     </ul>
                 </div>
