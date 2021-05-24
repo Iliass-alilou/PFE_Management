@@ -26,7 +26,10 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                         </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
 
+                        </li>*@
                         <li class="nav-item">
                             @{
                                 @if (User.IsInRole("Admin"))
@@ -34,7 +37,7 @@
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Students" asp-action="Index">Students</a>
                                 }
                             }
-                        </li>
+                          </li>
 
                         <li class="nav-item">
                             @{
@@ -62,6 +65,9 @@
                                 }
                             }
                         </li>
+                        @*<li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Role" asp-action="Index">Gerer Les Roles</a>
+                        </li>*@
                         <li class="nav-item">
                             @{
                                 @if (User.IsInRole("Admin"))

@@ -8,8 +8,14 @@
 
 <br />
 <p>
-    <a asp-action="Create" >Ajouter Un Nouveau étudiant </a>
+    <a asp-action="Create">Ajouter Un Nouveau étudiant </a>
 </p>
+<div class="m-lg-5">
+    <p class="bg-success" >
+        Le Champ <b>Has Account</b> en <b>Vert</b> presente les etudiants qui ont deja un compte etulisateur, sinon on <b>Bleu</b>
+        qui ont pas encore un Compte utilisateur
+    </p>
+</div>
 
 <form asp-action="Index" method="get">
     <div class="form-actions no-color">
@@ -34,6 +40,9 @@
                 Adresse Email
             </th>
             <th>
+                Has Account
+            </th>
+            <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Enrollment Date</a>
             </th>
             <th></th>
@@ -52,6 +61,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
+            @*ici je veux presenter la case has accout en vert pour les etudiant qui ont deja un compte utilistaeur
+                et en bleu ceux qui ont pas encore un compte*@
+            @{
+                @if (item.etatAccount == true)
+                {
+                    <td class="bg-success">
+                        @Html.DisplayFor(modelItem => item.etatAccount)
+                    </td>
+                }
+                else {
+                    <td class="bg-primary">
+                        @Html.DisplayFor(modelItem => item.etatAccount)
+                    </td>
+                }
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.EnrollmentDate)
             </td>
@@ -60,7 +84,7 @@
                 <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
                 @*<a class="" asp-action="Register"  asp-area="Identity"  asp-route-id="@item.ID">Create Account for this student</a>*@
-            <a asp-action="Register" asp-route-id="@item.ID">Create an account for this student</a>
+                <a asp-action="Register" asp-route-id="@item.ID">Create an account for this student</a>
             </td>
         </tr>
         }

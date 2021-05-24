@@ -269,10 +269,11 @@ namespace PFE_Management.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(Student model)
+        public async Task<IActionResult> Register(Student model , int? id)
         {
 
-            if (ModelState.IsValid)
+            
+            if (ModelState.IsValid )
             {
                 IdentityUser user = new IdentityUser() {  UserName=model.Email , 
                                                           Email = model.Email , 
@@ -282,8 +283,24 @@ namespace PFE_Management.Controllers
 
                 if (result.Succeeded)
                 {
-                    await _signManager.SignInAsync(user, false);
-                    return RedirectToAction("Index", "Students");
+                    //Ici Pour Editer le champs Has Account to yes une fois l'Admin creer un compte pour cet Utilisateur
+                    var studentToUpdate = await _context.Students.FirstOrDefaultAsync(s => s.ID == id);
+                    if (await TryUpdateModelAsync<Student>(
+                        studentToUpdate, "", s => s.etatAccount))
+                    {
+                        try
+                        {
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
+                        }
+                        catch (DbUpdateException /* ex */)
+                        {
+                            //Log the error (uncomment ex variable name and write a log.)
+                            ModelState.AddModelError("", "Unable to save changes. " +
+                                "Try again, and if the problem persists, " +
+                                "see your system administrator.");
+                        }
+                    }
                 }
                 else
                 {

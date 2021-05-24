@@ -13,6 +13,8 @@ namespace PFE_Management.Models
         [Key]
         public int ID { get; set; }
 
+        //public string HasAccount { get; set; }
+
         [StringLength(50)]
         [Required]
         [Display(Name ="Last Name")]
