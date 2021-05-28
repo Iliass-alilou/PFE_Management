@@ -16,7 +16,7 @@ using PFE_Management.Models;
 
 namespace PFE_Management.Controllers
 {
-    //[Authorize(Roles = "Admin , Construtor , 	Department chef")]
+   // [Authorize(Roles = "Instructor")]
    
     public class StudentsController : Controller
     {
