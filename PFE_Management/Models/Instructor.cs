@@ -60,6 +60,7 @@ namespace PFE_Management.Models
                 return LastName + "   " + FirstMidName;
             }
         }
+        public ICollection<Stage> Stages { get; set; }
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
         public ICollection<Department> departments { get; set; }
         public OfficeAssignment OfficeAssignments { get; set; }

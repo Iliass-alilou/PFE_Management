@@ -1,0 +1,138 @@
+﻿@model PFE_Management.Models.Stage
+
+@{
+    ViewData["Title"] = "Detail de stage";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Department</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TitreStage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TitreStage)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DescriptionStage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DescriptionStage)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Nom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Nom)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Prenom)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Prenom)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Telephone)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Telephone)
+        </dd>
+
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CIN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CIN)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CNE)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CNE)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.OrganismeDacceuil)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.OrganismeDacceuil)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PosteEncadrantExterne)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PosteEncadrantExterne)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.EmailEncadrantExterne)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.EmailEncadrantExterne)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.TelephoneEncadrantExterne)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TelephoneEncadrantExterne)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PosteEncadrantExterne)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PosteEncadrantExterne)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.VilleStage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VilleStage)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.PaysStage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PaysStage)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateDebutStage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateDebutStage)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateFinStage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateFinStage)
+        </dd>
+
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.DateFinStage)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.DateFinStage)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="AllStages">Back to List</a>
+</div>
+
+
