@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RRI3b2tMivqyQfwZgib1VK7y836sQqiija50xoADLCN38qo4tR0IqruCsVb9J5gF2Tos5qWDQJ9iZF2rOG3uDg==",
+  "dgSpecHash": "cCtVpLG0nKZEDYlGg+msVDt8q6xyFcqtE46ueAxgnDIQiqikAWHAfZb6YZIGsvXbZKppG3E1Yv0KaN4/LMZzzg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\ilias\\OneDrive\\Bureau\\PFE management test\\PFE_Management\\PFE_Management.csproj",
+  "projectFilePath": "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\dev Project PFE managment\\PFE_Management\\PFE_Management.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ilias\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\3.1.15\\microsoft.aspnetcore.cryptography.internal.3.1.15.nupkg.sha512",
     "C:\\Users\\ilias\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\3.1.15\\microsoft.aspnetcore.cryptography.keyderivation.3.1.15.nupkg.sha512",
