@@ -16,7 +16,7 @@ using PFE_Management.Models;
 
 namespace PFE_Management.Controllers
 {
-   // [Authorize(Roles = "Instructor")]
+   [Authorize(Roles = "Admin")]
    
     public class StudentsController : Controller
     {
@@ -33,7 +33,6 @@ namespace PFE_Management.Controllers
             _context = context;
             _userManager = user;
             _signManager = signManager ; 
-
 
         }
 

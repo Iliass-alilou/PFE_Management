@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -11,13 +13,16 @@ using PFE_Management.Models.SchoolViewModels;
 
 namespace PFE_Management.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class InstructorsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public InstructorsController(ApplicationDbContext context)
+        public InstructorsController(ApplicationDbContext context , UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Instructors
@@ -33,6 +38,12 @@ namespace PFE_Management.Controllers
                   .Include(i => i.CourseAssignments)
                     .ThenInclude(i => i.Course)
                         .ThenInclude(i => i.Department)
+
+                  .Include(i => i.departments)
+                    
+
+                  
+
                    .AsNoTracking()
                    .OrderBy(i => i.LastName)
                   .ToListAsync();
@@ -91,7 +102,7 @@ namespace PFE_Management.Controllers
         // POST: Instructors/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("FirstMidName,HireDate,LastName,OfficeAssignment")] Instructor instructor, string[] selectedCourses)
+        public async Task<IActionResult> Create([Bind("FirstMidName,LastName,Email")] Instructor instructor, string[] selectedCourses)
         {
             if (selectedCourses != null)
             {
@@ -270,6 +281,73 @@ namespace PFE_Management.Controllers
         private bool InstructorExists(int id)
         {
             return _context.Instructors.Any(e => e.ID == id);
+        }
+
+        // Register an Account for Instructor
+
+        //Get for Register
+        public async Task<IActionResult> Register(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var RegisterModel = await _context.Instructors.FindAsync(id);
+            if (RegisterModel == null)
+            {
+                return NotFound();
+            }
+            return View(RegisterModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(Instructor model, int? id)
+        {
+
+
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = new IdentityUser()
+                {
+                    UserName = model.Email,
+                    Email = model.Email,
+                    EmailConfirmed = true
+                };
+
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+                    //Ici Pour Editer le champs Has Account to yes une fois l'Admin creer un compte pour cet Utilisateur
+                    var instructorToUpdate = await _context.Instructors.FirstOrDefaultAsync(s => s.ID == id);
+                    if (await TryUpdateModelAsync<Instructor>(
+                        instructorToUpdate, "", s => s.etatAccount))
+                    {
+                        try
+                        {
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
+                        }
+                        catch (DbUpdateException /* ex */)
+                        {
+                            //Log the error (uncomment ex variable name and write a log.)
+                            ModelState.AddModelError("", "Unable to save changes. " +
+                                "Try again, and if the problem persists, " +
+                                "see your system administrator.");
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Instructors");
         }
     }
 }

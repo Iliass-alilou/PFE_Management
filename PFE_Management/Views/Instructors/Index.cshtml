@@ -6,18 +6,22 @@
 }
 
 <h1>Instructors</h1>
-
+<br />
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Ajouter Un Nouveau Enseignant</a>
 </p>
+<br />
 <table class="table">
     <thead>
         <tr>
             <th>Last Name</th>
             <th>First Name</th>
-            <th>Hire Date</th>
-            <th>Office</th>
-            <th>Courses</th>
+            <th>Email</th>
+            <th>Has Account</th>
+            @*<th>Hire Date</th>
+            <th>Office</th>*@
+            <th>Departement</th>
+            @*<th>Courses</th>*@
             <th></th>
         </tr>
     </thead>
@@ -36,29 +40,60 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.FirstMidName)
                 </td>
+
                 <td>
-                    @Html.DisplayFor(modelItem => item.HireDate)
+                    @Html.DisplayFor(modelItem => item.Email)
                 </td>
-                <td>
-                    @if (item.OfficeAssignments != null)
+                @*ici je veux presenter la case has accout en vert pour les etudiant qui ont deja un compte utilistaeur
+                et en bleu ceux qui ont pas encore un compte*@
+                @{
+                    @if (item.etatAccount == true)
                     {
-                        @item.OfficeAssignments.Location
+                        <td class="bg-success">
+                            @Html.DisplayFor(modelItem => item.etatAccount)
+                        </td>
+                    }
+                    else {
+                        <td class="bg-primary">
+                            @Html.DisplayFor(modelItem => item.etatAccount)
+                        </td>
+                    }
+                }
+
+
+                        @*<td>
+                        @Html.DisplayFor(modelItem => item.HireDate)
+                    </td>
+                    <td>
+                        @if (item.OfficeAssignments != null)
+                        {
+                            @item.OfficeAssignments.Location
+                        }
+                    </td>*@
+
+                  <td>
+                    @{
+                        foreach (var department in item.departments)
+                        {
+                            @department.Name <br />
+                        }
                     }
                 </td>
-                <td>
+
+                @*<td>
                     @{
                         foreach (var course in item.CourseAssignments)
                         {
                             @course.Course.CourseID @:  @course.Course.Title <br />
                         }
                     }
-                </td>
+                </td>*@
                 <td>
                     <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
                     <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
                     <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="@item.ID">Delete</a> |
-                    <a class="" asp-area="Identity" asp-page="/Account/Register" asp-route-id="@item.ID">Creer un compte pour cet etudiant</a>
+                    <a asp-action="Register" asp-route-id="@item.ID">Create an account for this Instructor</a>
                 </td>
             </tr>
         }

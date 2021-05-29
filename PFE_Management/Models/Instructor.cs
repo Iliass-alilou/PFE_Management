@@ -13,6 +13,29 @@ namespace PFE_Management.Models
         
         public int ID { get; set; }
 
+        /****************************** */
+        public bool etatAccount { get; set; }
+
+        [DataType(DataType.EmailAddress)]
+        [Required(ErrorMessage = "The Email address cannot be empty.")]
+        [Display(Name = "Email address")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
+        [MaxLength(254, ErrorMessage = "The Email address cannot be longer than 254 characters.")]
+        public string Email { get; set; }
+
+
+        [DataType(DataType.Password)]
+        //[Required(ErrorMessage = "The Password cannot be empty.")]
+        [Display(Name = "Password")]
+        [MaxLength(100, ErrorMessage = "The Password cannot be longer than 100 characters.")]
+        public string Password { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Password confirmation")]
+        [MaxLength(100, ErrorMessage = "The Password cannot be longer than 100 characters.")]
+        [Compare("Password", ErrorMessage = "The entered passwords do not match.")]
+        public string PasswordConfirmation { get; set; }
+        /* ***********************************/
+
         [StringLength(50)]
         [Required]
         [Display(Name = "Last Name")]
@@ -34,10 +57,11 @@ namespace PFE_Management.Models
         {
             get
             {
-                return LastName + " , " + FirstMidName;
+                return LastName + "   " + FirstMidName;
             }
         }
         public ICollection<CourseAssignment> CourseAssignments { get; set; }
+        public ICollection<Department> departments { get; set; }
         public OfficeAssignment OfficeAssignments { get; set; }
     }
 }

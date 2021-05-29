@@ -3136,3 +3136,4 @@ C:\Users\ilias\OneDrive\Bureau\PFE management test\PFE_Management\obj\Debug\netc
 C:\Users\ilias\OneDrive\Bureau\PFE management test\PFE_Management\obj\Debug\netcoreapp3.1\PFE_Management.dll
 C:\Users\ilias\OneDrive\Bureau\PFE management test\PFE_Management\obj\Debug\netcoreapp3.1\PFE_Management.pdb
 C:\Users\ilias\OneDrive\Bureau\PFE management test\PFE_Management\obj\Debug\netcoreapp3.1\PFE_Management.genruntimeconfig.cache
+C:\Users\ilias\OneDrive\Bureau\PFE management test\PFE_Management\obj\Debug\netcoreapp3.1\Razor\Views\Instructors\Register.cshtml.g.cs

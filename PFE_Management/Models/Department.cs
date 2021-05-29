@@ -30,5 +30,8 @@ namespace PFE_Management.Models
 
         public Instructor Administrator { get; set; }
         public ICollection<Course> Courses { get; set; }
+
+        [NotMapped]
+        public bool cheked { get; set; }
     }
 }

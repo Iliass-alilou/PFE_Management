@@ -35,7 +35,7 @@ namespace PFE_Management.Controllers
             }
 
             var department = await _context.Departments
-                //.Include(i => i.Administrator)
+                .Include(i => i.Administrator)
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.DepartmentID == id);
             if (department == null)
