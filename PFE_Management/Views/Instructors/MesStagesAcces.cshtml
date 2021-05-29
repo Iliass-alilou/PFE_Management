@@ -1,0 +1,37 @@
+﻿
+@model PFE_Management.Models.SchoolViewModels.InstructorIndexData
+
+@{
+    ViewData["Title"] = "Instructors";
+}
+
+<h1>Instructors</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            
+            <th> test </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Instructors)
+        {
+            string selectedRow = "";
+            if (item.ID == (int?)ViewData["InstructorID"])
+            {
+                selectedRow = "success";
+            }
+            <tr class="@selectedRow">
+                
+                <td>
+                    
+                    <a asp-action="MesStages" asp-route-id="@item.ID">Mes Stages</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

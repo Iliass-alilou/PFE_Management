@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +17,7 @@ using PFE_Management.Models;
 
 namespace PFE_Management.Controllers
 {
-   [Authorize(Roles = "Admin")]
+  
    
     public class StudentsController : Controller
     {
@@ -37,6 +38,7 @@ namespace PFE_Management.Controllers
         }
 
         // GET: Students
+        [Authorize (Roles ="Admin")]
         public async Task<IActionResult> Index(
             string sortOrder,
             string currentFilter,
@@ -310,6 +312,74 @@ namespace PFE_Management.Controllers
                 }
             }
             return RedirectToAction("Index", "Students");
+        }
+
+        // get stage view with all instructors 
+        //public IActionResult CreateStage()
+        //{
+        //    //PopulateInstructorsDropDownList();
+        //    PopulateDepartmentsDropDownList();
+        //    ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FirstMidName");
+        //    // var studentid = await _context.Students.FindAsync(id);
+        //    ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    //ViewData["StudentIDhashed"] = userId;
+
+        //    return View();
+        //}
+
+
+
+        // create stage version 2 with iduser of Instructor
+        public IActionResult CreateStage()
+        {
+            //PopulateInstructorsDropDownList();
+            PopulateDepartmentsDropDownList();
+            ViewData["InstructorID"] = new SelectList(_userManager., "ID", "FirstMidName");
+            // var studentid = await _context.Students.FindAsync(id);
+            ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            //ViewData["StudentIDhashed"] = userId;
+
+            return View();
+        }
+
+
+
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        /*, Genre, GIN, CNE, Email,DateNaissance, Annee,Telephone, OrganismeDacceuil, EncadrantExterne, EmailEncadrantExterne,TelephoneEncadrantExterne, PosteEncadrantExterne, TitreStage, DescriptionStage, VilleStage, PaysStage, DateDebutStage, DateFinStage, DepartmentID,InstructorID*/
+        public async Task<IActionResult> CreateStage(Stage stage)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(stage);
+                    await _context.SaveChangesAsync();
+                    //return RedirectToAction(nameof(Index));
+                    return View();
+                }
+                PopulateDepartmentsDropDownList(stage.DepartmentID);
+            }
+            catch (DbUpdateException)
+            {
+                ModelState.AddModelError("", "Unable to save Stage . " +
+                    "Try again, and if the problem persists " +
+                    "see your system administrator.");
+            }
+            //return RedirectToAction(nameof(Index));
+            return View();
+        }
+        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
+        {
+            var departmentsQuery = from d in _context.Departments
+                                   orderby d.Name
+                                   select d;
+            ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
+            Console.WriteLine(selectedDepartment);
         }
 
     }

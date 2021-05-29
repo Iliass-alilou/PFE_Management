@@ -13,7 +13,7 @@ using PFE_Management.Models.SchoolViewModels;
 
 namespace PFE_Management.Controllers
 {
-    [Authorize(Roles = "Admin")]
+    
     public class InstructorsController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -349,5 +349,88 @@ namespace PFE_Management.Controllers
             }
             return RedirectToAction("Index", "Instructors");
         }
+
+        // mes stage + liste des de tous les stages + Details de chaque stage 
+
+        // get all stages from the database :
+        public async Task<IActionResult> AllStages()
+        {
+            var applicationDbContext = _context.Stages;
+            return View(await applicationDbContext.ToListAsync());
+        }
+
+        // get and show details foreach stage
+        public async Task<IActionResult> DetailsStage(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var stage = await _context.Stages
+
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (stage == null)
+            {
+                return NotFound();
+            }
+
+            return View(stage);
+        }
+        [HttpGet]
+
+
+        public async Task<IActionResult>MesStagesAcces(int? id)
+        {
+
+            var viewModel = new InstructorIndexData();
+            viewModel.Instructors = await _context.Instructors
+                  .Include(i => i.OfficeAssignments)
+                  .Include(i => i.Stages)
+                  .Include(i => i.CourseAssignments)
+                    .ThenInclude(i => i.Course)
+                        .ThenInclude(i => i.Enrollments)
+                           .ThenInclude(i => i.Student)
+                  .Include(i => i.CourseAssignments)
+                    .ThenInclude(i => i.Course)
+                        .ThenInclude(i => i.Department)
+                   .AsNoTracking()
+                   .OrderBy(i => i.LastName)
+                  .ToListAsync();
+            if (id != null)
+            {
+                ViewData["InstructorID"] = id.Value;
+                Instructor instructor = viewModel.Instructors.Where(
+                    i => i.ID == id.Value).Single();
+               
+            }
+
+            return View(viewModel);
+
+
+        }
+        public async Task<IActionResult> MesStages(int? id)
+        {
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                var instructorId = id.Value;
+                var stages = _context.Stages
+                    .Where(x => x.InstructorID == instructorId);
+
+                return View(await stages.ToListAsync());
+            }
+
+        }
+
+       
     }
+
+
 }
+

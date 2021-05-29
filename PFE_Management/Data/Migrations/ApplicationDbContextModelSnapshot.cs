@@ -369,6 +369,107 @@ namespace PFE_Management.Data.Migrations
                     b.ToTable("OfficeAssignment");
                 });
 
+            modelBuilder.Entity("PFE_Management.Models.Stage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Annee")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CIN")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CNE")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateDebutStage")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateFinStage")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DateNaissance")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("DepartmentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("DescriptionStage")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailEncadrantExterne")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EncadrantExterne")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("EtatStage")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Genre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("InstructorID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Nom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("OrganismeDacceuil")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PaysStage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PosteEncadrantExterne")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prenom")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StudentIDhashed")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Telephone")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TelephoneEncadrantExterne")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TitreStage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("VilleStage")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentID");
+
+                    b.HasIndex("InstructorID");
+
+                    b.ToTable("Stage");
+                });
+
             modelBuilder.Entity("PFE_Management.Models.Student", b =>
                 {
                     b.Property<int>("ID")
@@ -489,7 +590,7 @@ namespace PFE_Management.Data.Migrations
             modelBuilder.Entity("PFE_Management.Models.Department", b =>
                 {
                     b.HasOne("PFE_Management.Models.Instructor", "Administrator")
-                        .WithMany()
+                        .WithMany("departments")
                         .HasForeignKey("InstructorID");
                 });
 
@@ -513,6 +614,21 @@ namespace PFE_Management.Data.Migrations
                     b.HasOne("PFE_Management.Models.Instructor", "Instructor")
                         .WithOne("OfficeAssignments")
                         .HasForeignKey("PFE_Management.Models.OfficeAssignment", "InstructorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("PFE_Management.Models.Stage", b =>
+                {
+                    b.HasOne("PFE_Management.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("PFE_Management.Models.Instructor", "Instructor")
+                        .WithMany("Stages")
+                        .HasForeignKey("InstructorID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

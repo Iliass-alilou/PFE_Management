@@ -1,0 +1,204 @@
+﻿
+@model PFE_Management.Models.Stage
+@{
+    ViewData["Title"] = "Create Stage";
+}
+
+@*<form asp-action="CreateStage" method="POST" class="needs-validation" novalidate>*@
+<form asp-action="CreateStage">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <input type="hidden" asp-for="StudentIDhashed" value="@ViewBag.userId" />
+    @*<input type="hidden" vasp-items="ViewBag.StudentID" />*@
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+            <label asp-for="Nom"></label>
+            <input class="form-control" asp-for="Nom" />
+            <span asp-validation-for="Nom"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="Prenom"></label>
+            <input class="form-control" asp-for="Prenom" />
+            <span asp-validation-for="Prenom"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="Genre"></label>
+            <input class="form-control" asp-for="Genre" />
+            <span asp-validation-for="Genre"></span>
+        </div>
+
+    </div>
+
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="CIN"></label>
+            <input class="form-control" asp-for="CIN" />
+            <span asp-validation-for="CIN"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="CNE"></label>
+            <input class="form-control" asp-for="CNE" />
+            <span asp-validation-for="CNE"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="Email"></label>
+            <input class="form-control" asp-for="Email" />
+            <span asp-validation-for="Email"></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="DateNaissance"></label>
+            <input class="form-control" asp-for="DateNaissance" />
+            <span asp-validation-for="DateNaissance"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+            <label asp-for="DepartmentID" class="control-label"></label>
+            <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.DepartmentID">
+                <option value="">-- Choisir Votre Filiere --</option>
+            </select>
+            <span asp-validation-for="DepartmentID" class="text-danger"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="Annee"></label>
+            <input class="form-control" asp-for="Annee" />
+            <span asp-validation-for="Annee"></span>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="Telephone"></label>
+            <input class="form-control" asp-for="Telephone" />
+            <span asp-validation-for="Telephone"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="OrganismeDacceuil"></label>
+            <input class="form-control" asp-for="OrganismeDacceuil" />
+            <span asp-validation-for="OrganismeDacceuil"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="EncadrantExterne"></label>
+            <input class="form-control" asp-for="EncadrantExterne" />
+            <span asp-validation-for="EncadrantExterne"></span>
+
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="EmailEncadrantExterne"></label>
+            <input class="form-control" asp-for="EmailEncadrantExterne" />
+            <span asp-validation-for="EmailEncadrantExterne"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="TelephoneEncadrantExterne"></label>
+            <input class="form-control" asp-for="TelephoneEncadrantExterne" />
+            <span asp-validation-for="TelephoneEncadrantExterne"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="PosteEncadrantExterne"></label>
+            <input class="form-control" asp-for="PosteEncadrantExterne" />
+            <span asp-validation-for="PosteEncadrantExterne"></span>
+        </div>
+
+
+    </div>
+
+    <div class="row">
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="TitreStage"></label>
+            <input class="form-control" asp-for="TitreStage" />
+            <span asp-validation-for="TitreStage"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="DescriptionStage"></label>
+            <input class="form-control" asp-for="DescriptionStage" />
+            <span asp-validation-for="DescriptionStage"></span>
+        </div>
+
+        <div class="col-lg-4 mb-4">
+
+            <label asp-for="InstructorID" class="control-label"></label>
+            <select asp-for="InstructorID" class="form-control" asp-items="ViewBag.InstructorID">
+                <option value="">-- Select votre Encadrant --</option>
+            </select>
+            <span asp-validation-for="InstructorID" class="text-danger"></span>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-lg-3 mb-4">
+
+            <label asp-for="VilleStage"></label>
+            <input class="form-control" asp-for="VilleStage" />
+            <span asp-validation-for="VilleStage"></span>
+        </div>
+
+        <div class="col-lg-3 mb-4">
+
+            <label asp-for="PaysStage"></label>
+            <input class="form-control" asp-for="PaysStage" />
+            <span asp-validation-for="PaysStage"></span>
+        </div>
+
+        <div class="col-lg-3 mb-4">
+
+            <label asp-for="DateDebutStage"></label>
+            <input class="form-control" asp-for="DateDebutStage" />
+            <span asp-validation-for="DateDebutStage"></span>
+        </div>
+
+        <div class="col-lg-3 mb-4">
+
+            <label asp-for="DateFinStage"></label>
+            <input class="form-control" asp-for="DateFinStage" />
+            <span asp-validation-for="DateFinStage"></span>
+        </div>
+
+    </div>
+
+
+
+    <button type="submit" value="CreateStage" class="btn btn-primary">Enregister</button>
+</form>
+
+@section scripts
+{
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
