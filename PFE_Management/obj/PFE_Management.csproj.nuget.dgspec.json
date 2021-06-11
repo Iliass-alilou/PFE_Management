@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\dev Project PFE managment\\handShake\\PFE_Management\\PFE_Management.csproj": {}
+    "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\.net core Projet Gestion pfe\\Net projet\\.Net projet\\PFE_Management\\PFE_Management.csproj": {}
   },
   "projects": {
-    "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\dev Project PFE managment\\handShake\\PFE_Management\\PFE_Management.csproj": {
+    "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\.net core Projet Gestion pfe\\Net projet\\.Net projet\\PFE_Management\\PFE_Management.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\dev Project PFE managment\\handShake\\PFE_Management\\PFE_Management.csproj",
+        "projectUniqueName": "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\.net core Projet Gestion pfe\\Net projet\\.Net projet\\PFE_Management\\PFE_Management.csproj",
         "projectName": "PFE_Management",
-        "projectPath": "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\dev Project PFE managment\\handShake\\PFE_Management\\PFE_Management.csproj",
+        "projectPath": "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\.net core Projet Gestion pfe\\Net projet\\.Net projet\\PFE_Management\\PFE_Management.csproj",
         "packagesPath": "C:\\Users\\ilias\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\dev Project PFE managment\\handShake\\PFE_Management\\obj\\",
+        "outputPath": "C:\\Users\\ilias\\OneDrive\\Bureau\\S4\\.Net +Spring  +Design_Pattern(Kabbaj)\\.net core Projet Gestion pfe\\Net projet\\.Net projet\\PFE_Management\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ilias\\AppData\\Roaming\\NuGet\\NuGet.Config",

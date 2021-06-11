@@ -1,37 +1,65 @@
-﻿
-@model PFE_Management.Models.SchoolViewModels.InstructorIndexData
+﻿@model IEnumerable<PFE_Management.Models.Stage>
 
 @{
-    ViewData["Title"] = "Instructors";
+    ViewData["Title"] = "All stages";
 }
 
-<h1>Instructors</h1>
+<h1> Liste des stages de cette Année </h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
+
 <table class="table">
     <thead>
         <tr>
-            
-            <th> test </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TitreStage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Nom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Prenom)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.OrganismeDacceuil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.EncadrantExterne)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescriptionStage)
+            </th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Instructors)
+        @foreach (var item in Model)
         {
-            string selectedRow = "";
-            if (item.ID == (int?)ViewData["InstructorID"])
-            {
-                selectedRow = "success";
-            }
-            <tr class="@selectedRow">
-                
+            <tr>
                 <td>
-                    
-                    <a asp-action="MesStages" asp-route-id="@item.ID">Mes Stages</a>
+                    @Html.DisplayFor(modelItem => item.TitreStage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Prenom)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.OrganismeDacceuil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EncadrantExterne)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DescriptionStage)
+                </td>
+                <td>
+
+                    <a asp-action="DetailsStage" asp-route-id="@item.Id">Details</a>
+
                 </td>
             </tr>
         }
     </tbody>
 </table>
+

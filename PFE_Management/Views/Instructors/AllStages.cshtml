@@ -28,37 +28,50 @@
             <th>
                 @Html.DisplayNameFor(model => model.DescriptionStage)
             </th>
+            <th>
+                 @Html.DisplayNameFor(model => model.EtatStage)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.TitreStage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Nom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Prenom)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.OrganismeDacceuil)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EncadrantExterne)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DescriptionStage)
-                </td>
-                <td>
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TitreStage)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prenom)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.OrganismeDacceuil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.EncadrantExterne)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescriptionStage)
+            </td>
+            <td>
+                @if(item.EtatStage == false)
+                {
+                <div>Invalid</div>
+                }
+                else
+                {
+                <div>valid</div>
+                }
+            </td>
+            <td>
 
-                    <a asp-action="DetailsStage" asp-route-id="@item.Id">Details</a>
+                <a asp-action="DetailsStage" asp-route-id="@item.Id">Details</a>
 
-                </td>
-            </tr>
+            </td>
+        </tr>
         }
     </tbody>
 </table>

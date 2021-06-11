@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -381,50 +382,59 @@ namespace PFE_Management.Controllers
         [HttpGet]
 
 
-        public async Task<IActionResult>MesStagesAcces(int? id)
+        public async Task<IActionResult> MesStagesAcces() 
         {
+            
 
-            var viewModel = new InstructorIndexData();
-            viewModel.Instructors = await _context.Instructors
-                  .Include(i => i.OfficeAssignments)
-                  .Include(i => i.Stages)
-                  .Include(i => i.CourseAssignments)
-                    .ThenInclude(i => i.Course)
-                        .ThenInclude(i => i.Enrollments)
-                           .ThenInclude(i => i.Student)
-                  .Include(i => i.CourseAssignments)
-                    .ThenInclude(i => i.Course)
-                        .ThenInclude(i => i.Department)
-                   .AsNoTracking()
-                   .OrderBy(i => i.LastName)
-                  .ToListAsync();
-            if (id != null)
-            {
-                ViewData["InstructorID"] = id.Value;
-                Instructor instructor = viewModel.Instructors.Where(
-                    i => i.ID == id.Value).Single();
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);// will give the user's userId
+            var userName = User.FindFirstValue(ClaimTypes.Name); // will give the user's userName
+
+            //var instructorId = _context.Instructors
+            //                .Where(x => x.Email == userName);
+
+            var instructor = await _context.Instructors
+                       .FirstOrDefaultAsync(x => x.Email == userName);
+
+           
+                
                
-            }
 
-            return View(viewModel);
+            
+
+           
+            var instructorId = instructor.ID;
+
+           var stages = _context.Stages
+                         .Where(x => x.InstructorID == instructorId && x.EtatStage == true);
+
+            return View(await stages.ToListAsync());
+            
 
 
         }
-        public async Task<IActionResult> MesStages(int? id)
+
+
+       
+
+        public IActionResult MesStages()
         {
+          //var idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.idUser = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return View();
 
-            if (id == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                var instructorId = id.Value;
-                var stages = _context.Stages
-                    .Where(x => x.InstructorID == instructorId);
+            //if (idUser == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
 
-                return View(await stages.ToListAsync());
-            }
+            //    var instructorId = id.Value;
+            //    var stages = _context.Stages
+            //        .Where(x => x.InstructorID == instructorId);
+
+            //    return View(await stages.ToListAsync());
+            //}
 
         }
 

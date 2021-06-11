@@ -28,14 +28,14 @@
                             @{
                                 @if (User.IsInRole("Admin"))
                                 {
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
                                 }
                             }
                         </li>
 
                         @*<li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
-                        </li>*@
+            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="About">About</a>
+        </li>*@
 
                         <li class="nav-item">
                             @{
@@ -97,6 +97,14 @@
                             @if (User.IsInRole("Instructor"))
                             {
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Instructors" asp-action="AllStages">tous les stages</a>
+                            }
+
+                        </li>
+
+                        <li class="nav-item">
+                            @if (User.IsInRole("Chef_Departement"))
+                            {
+                                <a class="nav-link text-dark" asp-area="" asp-controller="ChefDept" asp-action="Index">liste des stages</a>
                             }
 
                         </li>

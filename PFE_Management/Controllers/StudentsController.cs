@@ -314,28 +314,12 @@ namespace PFE_Management.Controllers
             return RedirectToAction("Index", "Students");
         }
 
-        //get stage view with all instructors
-        public IActionResult CreateStage()
-        {
-            //PopulateInstructorsDropDownList();
-            PopulateDepartmentsDropDownList();
-            ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FirstMidName");
-            // var studentid = await _context.Students.FindAsync(id);
-            ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-            //ViewData["StudentIDhashed"] = userId;
-
-            return View();
-        }
-
-
-
-        // create stage version 2 with iduser of Instructor
+        // get stage view with all instructors 
         //public IActionResult CreateStage()
         //{
         //    //PopulateInstructorsDropDownList();
         //    PopulateDepartmentsDropDownList();
-        //    ViewData["InstructorID"] = new SelectList(_userManager, "ID", "FirstMidName");
+        //    ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FirstMidName");
         //    // var studentid = await _context.Students.FindAsync(id);
         //    ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -346,6 +330,42 @@ namespace PFE_Management.Controllers
 
 
 
+        // create stage version 2 with iduser of Instructor
+        public async Task<IActionResult> CreateStage()
+        {
+            //PopulateInstructorsDropDownList();
+
+
+            //-----------------------------------
+            var idStudentStage = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var stage = await _context.Stages
+
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.StudentIDhashed == idStudentStage);
+            ViewBag.ham9atna = stage.EtatStage;
+            if (stage != null)
+            {
+                return View(stage);
+            }
+
+            
+
+            //------------------------------------
+            PopulateDepartmentsDropDownList();
+           ViewData["InstructorID"] = new SelectList(_context.Instructors , "ID", "FirstMidName");
+
+            // var studentid = await _context.Students.FindAsync(id);
+            ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.userName = User.FindFirstValue(ClaimTypes.Name); // will give the user's userName
+             
+
+            //ViewData["StudentIDhashed"] = userId;
+
+            return View();
+        }
+
+
+
 
 
         [HttpPost]
@@ -353,6 +373,8 @@ namespace PFE_Management.Controllers
         /*, Genre, GIN, CNE, Email,DateNaissance, Annee,Telephone, OrganismeDacceuil, EncadrantExterne, EmailEncadrantExterne,TelephoneEncadrantExterne, PosteEncadrantExterne, TitreStage, DescriptionStage, VilleStage, PaysStage, DateDebutStage, DateFinStage, DepartmentID,InstructorID*/
         public async Task<IActionResult> CreateStage(Stage stage)
         {
+
+
             try
             {
                 if (ModelState.IsValid)
@@ -370,8 +392,8 @@ namespace PFE_Management.Controllers
                     "Try again, and if the problem persists " +
                     "see your system administrator.");
             }
-            //return RedirectToAction(nameof(Index));
-            return View();
+           return RedirectToAction(nameof(Index));
+            
         }
         private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
         {
@@ -381,6 +403,8 @@ namespace PFE_Management.Controllers
             ViewBag.DepartmentID = new SelectList(departmentsQuery.AsNoTracking(), "DepartmentID", "Name", selectedDepartment);
             Console.WriteLine(selectedDepartment);
         }
+
+
 
     }
 }

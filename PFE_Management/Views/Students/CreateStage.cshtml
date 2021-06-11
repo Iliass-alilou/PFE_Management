@@ -6,194 +6,400 @@
 
 @*<form asp-action="CreateStage" method="POST" class="needs-validation" novalidate>*@
 <form asp-action="CreateStage">
+
+
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="StudentIDhashed" value="@ViewBag.userId" />
+    @*<p>@ViewBag.userId </p>
+        <p>@ViewBag.userName this is my email</p>*@
     @*<input type="hidden" vasp-items="ViewBag.StudentID" />*@
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-            <label asp-for="Nom"></label>
-            <input class="form-control" asp-for="Nom" />
-            <span asp-validation-for="Nom"></span>
-        </div>
 
-        <div class="col-lg-4 mb-4">
+    @if (ViewBag.ham9atna == true)
+    {
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+                <label asp-for="Nom"></label>
+                <input class="form-control" asp-for="Nom" disabled />
+                <span asp-validation-for="Nom"></span>
+            </div>
 
-            <label asp-for="Prenom"></label>
-            <input class="form-control" asp-for="Prenom" />
-            <span asp-validation-for="Prenom"></span>
-        </div>
+            <div class="col-lg-4 mb-4">
 
-        <div class="col-lg-4 mb-4">
+                <label asp-for="Prenom"></label>
+                <input class="form-control" asp-for="Prenom" disabled />
+                <span asp-validation-for="Prenom"></span>
+            </div>
 
-            <label asp-for="Genre"></label>
-            <input class="form-control" asp-for="Genre" />
-            <span asp-validation-for="Genre"></span>
-        </div>
+            <div class="col-lg-4 mb-4">
 
-    </div>
-
-
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="CIN"></label>
-            <input class="form-control" asp-for="CIN" />
-            <span asp-validation-for="CIN"></span>
-        </div>
-
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="CNE"></label>
-            <input class="form-control" asp-for="CNE" />
-            <span asp-validation-for="CNE"></span>
-        </div>
-
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="Email"></label>
-            <input class="form-control" asp-for="Email" />
-            <span asp-validation-for="Email"></span>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="DateNaissance"></label>
-            <input class="form-control" asp-for="DateNaissance" />
-            <span asp-validation-for="DateNaissance"></span>
-        </div>
-
-        <div class="col-lg-4 mb-4">
-            <label asp-for="DepartmentID" class="control-label"></label>
-            <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.DepartmentID">
-                <option value="">-- Choisir Votre Filiere --</option>
-            </select>
-            <span asp-validation-for="DepartmentID" class="text-danger"></span>
-        </div>
-
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="Annee"></label>
-            <input class="form-control" asp-for="Annee" />
-            <span asp-validation-for="Annee"></span>
-        </div>
-
-    </div>
-
-    <div class="row">
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="Telephone"></label>
-            <input class="form-control" asp-for="Telephone" />
-            <span asp-validation-for="Telephone"></span>
-        </div>
-
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="OrganismeDacceuil"></label>
-            <input class="form-control" asp-for="OrganismeDacceuil" />
-            <span asp-validation-for="OrganismeDacceuil"></span>
-        </div>
-
-        <div class="col-lg-4 mb-4">
-
-            <label asp-for="EncadrantExterne"></label>
-            <input class="form-control" asp-for="EncadrantExterne" />
-            <span asp-validation-for="EncadrantExterne"></span>
-
+                <label asp-for="Genre"></label>
+                <input class="form-control" asp-for="Genre" disabled />
+                <span asp-validation-for="Genre"></span>
+            </div>
 
         </div>
 
-    </div>
 
-    <div class="row">
-        <div class="col-lg-4 mb-4">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
 
-            <label asp-for="EmailEncadrantExterne"></label>
-            <input class="form-control" asp-for="EmailEncadrantExterne" />
-            <span asp-validation-for="EmailEncadrantExterne"></span>
+                <label asp-for="CIN"></label>
+                <input class="form-control" asp-for="CIN" disabled />
+                <span asp-validation-for="CIN"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="CNE"></label>
+                <input class="form-control" asp-for="CNE" disabled />
+                <span asp-validation-for="CNE"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="Email"></label>
+                <input class="form-control" asp-for="Email" disabled />
+                <span asp-validation-for="Email"></span>
+            </div>
+
         </div>
 
-        <div class="col-lg-4 mb-4">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
 
-            <label asp-for="TelephoneEncadrantExterne"></label>
-            <input class="form-control" asp-for="TelephoneEncadrantExterne" />
-            <span asp-validation-for="TelephoneEncadrantExterne"></span>
+                <label asp-for="DateNaissance"></label>
+                <input class="form-control" asp-for="DateNaissance" disabled />
+                <span asp-validation-for="DateNaissance"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+                <label asp-for="DepartmentID" class="control-label"></label>
+                <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.DepartmentID" disabled>
+                    <option value="">-- Choisir Votre Filiere --</option>
+                </select>
+                <span asp-validation-for="DepartmentID" class="text-danger"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="Annee"></label>
+                <input class="form-control" asp-for="Annee" disabled />
+                <span asp-validation-for="Annee"></span>
+            </div>
+
         </div>
 
-        <div class="col-lg-4 mb-4">
+        <div class="row">
+            <div class="col-lg-4 mb-4">
 
-            <label asp-for="PosteEncadrantExterne"></label>
-            <input class="form-control" asp-for="PosteEncadrantExterne" />
-            <span asp-validation-for="PosteEncadrantExterne"></span>
+                <label asp-for="Telephone"></label>
+                <input class="form-control" asp-for="Telephone" disabled />
+                <span asp-validation-for="Telephone"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="OrganismeDacceuil"></label>
+                <input class="form-control" asp-for="OrganismeDacceuil" disabled />
+                <span asp-validation-for="OrganismeDacceuil"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="EncadrantExterne"></label>
+                <input class="form-control" asp-for="EncadrantExterne" disabled />
+                <span asp-validation-for="EncadrantExterne"></span>
+
+
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="EmailEncadrantExterne"></label>
+                <input class="form-control" asp-for="EmailEncadrantExterne" disabled />
+                <span asp-validation-for="EmailEncadrantExterne"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="TelephoneEncadrantExterne"></label>
+                <input class="form-control" asp-for="TelephoneEncadrantExterne" disabled />
+                <span asp-validation-for="TelephoneEncadrantExterne"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="PosteEncadrantExterne"></label>
+                <input class="form-control" asp-for="PosteEncadrantExterne" disabled />
+                <span asp-validation-for="PosteEncadrantExterne"></span>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="TitreStage"></label>
+                <input class="form-control" asp-for="TitreStage" disabled />
+                <span asp-validation-for="TitreStage"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="DescriptionStage"></label>
+                <input class="form-control" asp-for="DescriptionStage" disabled />
+                <span asp-validation-for="DescriptionStage"></span>
+            </div>
+
+            <div class="col-lg-4 mb-4">
+
+                <label asp-for="InstructorID" class="control-label"></label>
+                <select asp-for="InstructorID" class="form-control" asp-items="ViewBag.InstructorID" disabled>
+                    <option value="">-- Select votre Encadrant --</option>
+                </select>
+                <span asp-validation-for="InstructorID" class="text-danger"></span>
+            </div>
         </div>
 
 
-    </div>
 
-    <div class="row">
-        <div class="col-lg-4 mb-4">
+        <div class="row">
+            <div class="col-lg-3 mb-4">
 
-            <label asp-for="TitreStage"></label>
-            <input class="form-control" asp-for="TitreStage" />
-            <span asp-validation-for="TitreStage"></span>
+                <label asp-for="VilleStage"></label>
+                <input class="form-control" asp-for="VilleStage" disabled />
+                <span asp-validation-for="VilleStage"></span>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+
+                <label asp-for="PaysStage"></label>
+                <input class="form-control" asp-for="PaysStage" disabled />
+                <span asp-validation-for="PaysStage"></span>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+
+                <label asp-for="DateDebutStage"></label>
+                <input class="form-control" asp-for="DateDebutStage" disabled />
+                <span asp-validation-for="DateDebutStage"></span>
+            </div>
+
+            <div class="col-lg-3 mb-4">
+
+                <label asp-for="DateFinStage"></label>
+                <input class="form-control" asp-for="DateFinStage" disabled />
+                <span asp-validation-for="DateFinStage"></span>
+            </div>
+
         </div>
 
-        <div class="col-lg-4 mb-4">
 
-            <label asp-for="DescriptionStage"></label>
-            <input class="form-control" asp-for="DescriptionStage" />
-            <span asp-validation-for="DescriptionStage"></span>
+
+        <div class="row">
+            <div class="col-lg-3 mb-4">
+                <button type="submit" value="CreateStage" class="btn btn-primary" disabled>Enregister</button>
+            </div>
+            <div class="col-lg-3 mb-4">
+                <button asp-controller="Home" asp-action="Index" class="btn btn-primary">Retour </button>
+            </div>
         </div>
 
-        <div class="col-lg-4 mb-4">
 
-            <label asp-for="InstructorID" class="control-label"></label>
-            <select asp-for="InstructorID" class="form-control" asp-items="ViewBag.InstructorID">
-                <option value="">-- Select votre Encadrant --</option>
-            </select>
-            <span asp-validation-for="InstructorID" class="text-danger"></span>
-        </div>
-    </div>
+            }
 
+            else
+            {
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <label asp-for="Nom"></label>
+                    <input class="form-control" asp-for="Nom" />
+                    <span asp-validation-for="Nom"></span>
+                </div>
 
+                <div class="col-lg-4 mb-4">
 
-    <div class="row">
-        <div class="col-lg-3 mb-4">
+                    <label asp-for="Prenom"></label>
+                    <input class="form-control" asp-for="Prenom" />
+                    <span asp-validation-for="Prenom"></span>
+                </div>
 
-            <label asp-for="VilleStage"></label>
-            <input class="form-control" asp-for="VilleStage" />
-            <span asp-validation-for="VilleStage"></span>
-        </div>
+                <div class="col-lg-4 mb-4">
 
-        <div class="col-lg-3 mb-4">
+                    <label asp-for="Genre"></label>
+                    <input class="form-control" asp-for="Genre" />
+                    <span asp-validation-for="Genre"></span>
+                </div>
 
-            <label asp-for="PaysStage"></label>
-            <input class="form-control" asp-for="PaysStage" />
-            <span asp-validation-for="PaysStage"></span>
-        </div>
-
-        <div class="col-lg-3 mb-4">
-
-            <label asp-for="DateDebutStage"></label>
-            <input class="form-control" asp-for="DateDebutStage" />
-            <span asp-validation-for="DateDebutStage"></span>
-        </div>
-
-        <div class="col-lg-3 mb-4">
-
-            <label asp-for="DateFinStage"></label>
-            <input class="form-control" asp-for="DateFinStage" />
-            <span asp-validation-for="DateFinStage"></span>
-        </div>
-
-    </div>
+            </div>
 
 
+            <div class="row">
+                <div class="col-lg-4 mb-4">
 
-    <button type="submit" value="CreateStage" class="btn btn-primary">Enregister</button>
+                    <label asp-for="CIN"></label>
+                    <input class="form-control" asp-for="CIN" />
+                    <span asp-validation-for="CIN"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="CNE"></label>
+                    <input class="form-control" asp-for="CNE" />
+                    <span asp-validation-for="CNE"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="Email"></label>
+                    <input class="form-control" asp-for="Email" />
+                    <span asp-validation-for="Email"></span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="DateNaissance"></label>
+                    <input class="form-control" asp-for="DateNaissance" />
+                    <span asp-validation-for="DateNaissance"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+                    <label asp-for="DepartmentID" class="control-label"></label>
+                    <select asp-for="DepartmentID" class="form-control" asp-items="ViewBag.DepartmentID">
+                        <option value="">-- Choisir Votre Filiere --</option>
+                    </select>
+                    <span asp-validation-for="DepartmentID" class="text-danger"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="Annee"></label>
+                    <input class="form-control" asp-for="Annee" />
+                    <span asp-validation-for="Annee"></span>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="Telephone"></label>
+                    <input class="form-control" asp-for="Telephone" />
+                    <span asp-validation-for="Telephone"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="OrganismeDacceuil"></label>
+                    <input class="form-control" asp-for="OrganismeDacceuil" />
+                    <span asp-validation-for="OrganismeDacceuil"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="EncadrantExterne"></label>
+                    <input class="form-control" asp-for="EncadrantExterne" />
+                    <span asp-validation-for="EncadrantExterne"></span>
+
+
+                </div>
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="EmailEncadrantExterne"></label>
+                    <input class="form-control" asp-for="EmailEncadrantExterne" />
+                    <span asp-validation-for="EmailEncadrantExterne"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="TelephoneEncadrantExterne"></label>
+                    <input class="form-control" asp-for="TelephoneEncadrantExterne" />
+                    <span asp-validation-for="TelephoneEncadrantExterne"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="PosteEncadrantExterne"></label>
+                    <input class="form-control" asp-for="PosteEncadrantExterne" />
+                    <span asp-validation-for="PosteEncadrantExterne"></span>
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="TitreStage"></label>
+                    <input class="form-control" asp-for="TitreStage" />
+                    <span asp-validation-for="TitreStage"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="DescriptionStage"></label>
+                    <input class="form-control" asp-for="DescriptionStage" />
+                    <span asp-validation-for="DescriptionStage"></span>
+                </div>
+
+                <div class="col-lg-4 mb-4">
+
+                    <label asp-for="InstructorID" class="control-label"></label>
+                    <select asp-for="InstructorID" class="form-control" asp-items="ViewBag.InstructorID">
+                        <option value="">-- Select votre Encadrant --</option>
+                    </select>
+                    <span asp-validation-for="InstructorID" class="text-danger"></span>
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="col-lg-3 mb-4">
+
+                    <label asp-for="VilleStage"></label>
+                    <input class="form-control" asp-for="VilleStage" />
+                    <span asp-validation-for="VilleStage"></span>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+
+                    <label asp-for="PaysStage"></label>
+                    <input class="form-control" asp-for="PaysStage" />
+                    <span asp-validation-for="PaysStage"></span>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+
+                    <label asp-for="DateDebutStage"></label>
+                    <input class="form-control" asp-for="DateDebutStage" />
+                    <span asp-validation-for="DateDebutStage"></span>
+                </div>
+
+                <div class="col-lg-3 mb-4">
+
+                    <label asp-for="DateFinStage"></label>
+                    <input class="form-control" asp-for="DateFinStage" />
+                    <span asp-validation-for="DateFinStage"></span>
+                </div>
+
+            </div>
+
+
+
+            <button type="submit" value="CreateStage" class="btn btn-primary">Enregister</button>
+            }
 </form>
 
 @section scripts
