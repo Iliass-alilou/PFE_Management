@@ -1,18 +1,18 @@
 ﻿@model RoleEdit
 
-<h1 class="bg-info text-white">Update Role</h1>
-<a asp-action="Index" class="btn btn-secondary">Back</a>
+<h1 class="bg-info text-white text-center">Affectation des utilisateur au Role</h1>
+<a asp-action="Index" class="btn btn-secondary">Retour</a>
 <div asp-validation-summary="All" class="text-danger"></div>
 
 <form method="post">
     <input type="hidden" name="roleName" value="@Model.Role.Name" />
     <input type="hidden" name="roleId" value="@Model.Role.Id" />
 
-    <h2 class="bg-info p-1 text-white">Add To @Model.Role.Name</h2>
+    <h2 class="bg-info p-1 text-white">Ajouter au Role @Model.Role.Name</h2>
     <table class="table table-bordered table-sm">
         @if (Model.NonMembers.Count() == 0)
         {
-            <tr><td colspan="2">All Users Are Members</td></tr>
+            <tr><td colspan="2">Tous les Utlisateurs sont des membres</td></tr>
         }
         else
         {
@@ -32,7 +32,7 @@
     <table class="table table-bordered table-sm">
         @if (Model.Members.Count() == 0)
         {
-            <tr><td colspan="2">No Users Are Members</td></tr>
+            <tr><td colspan="2">Aucun utilisateur est affecte</td></tr>
         }
         else
         {
@@ -47,5 +47,5 @@
             }
         }
     </table>
-    <button type="submit" class="btn btn-primary">Save</button>
+    <button type="submit" class="btn btn-primary">Enregistrer</button>
 </form>

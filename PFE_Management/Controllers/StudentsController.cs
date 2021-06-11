@@ -88,6 +88,7 @@ namespace PFE_Management.Controllers
         }
 
         // GET: Students/Details/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -114,6 +115,7 @@ namespace PFE_Management.Controllers
         // GET: Students/Create
 
         // [Authorize(Roles ="Admin")]
+        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             return View();
@@ -126,6 +128,7 @@ namespace PFE_Management.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("LastName,FirstMidName,Email,EnrollmentDate")] Student student)
         {
             try
@@ -147,6 +150,7 @@ namespace PFE_Management.Controllers
         }
 
         // GET: Students/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -170,6 +174,7 @@ namespace PFE_Management.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost , ActionName("Edit")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> EditPost(int? id)
         {
             if (id == null)
@@ -197,6 +202,7 @@ namespace PFE_Management.Controllers
         }
 
         // GET: Students/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id, bool? saveChangesError = false)
         {
             if (id == null)
@@ -225,6 +231,7 @@ namespace PFE_Management.Controllers
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var student = await _context.Students.FindAsync(id);
@@ -250,9 +257,10 @@ namespace PFE_Management.Controllers
             return _context.Students.Any(e => e.ID == id);
         }
 
-        /*    this for Registration    */
+        /*    pour que l'admine puisse creer un compte au etudiant : l'etat du creation du compte devient true   */
 
         //Get for Register
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register(int? id)
         {
             if (id == null)
@@ -261,15 +269,27 @@ namespace PFE_Management.Controllers
             }
 
             var RegisterModel = await _context.Students.FindAsync(id);
+
+
             if (RegisterModel == null)
             {
                 return NotFound();
             }
+
+
+            try
+            {
+
+                ViewBag.ham9atna = RegisterModel.etatAccount;
+            }
+            catch { }
+
             return View(RegisterModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register(Student model , int? id)
         {
 
@@ -282,26 +302,37 @@ namespace PFE_Management.Controllers
 
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
+                
+
                 if (result.Succeeded)
                 {
                     //Ici Pour Editer le champs Has Account to yes une fois l'Admin creer un compte pour cet Utilisateur
-                    var studentToUpdate = await _context.Students.FirstOrDefaultAsync(s => s.ID == id);
-                    if (await TryUpdateModelAsync<Student>(
-                        studentToUpdate, "", s => s.etatAccount))
-                    {
-                        try
-                        {
-                            await _context.SaveChangesAsync();
-                            return RedirectToAction(nameof(Index));
-                        }
-                        catch (DbUpdateException /* ex */)
-                        {
-                            //Log the error (uncomment ex variable name and write a log.)
-                            ModelState.AddModelError("", "Unable to save changes. " +
-                                "Try again, and if the problem persists, " +
-                                "see your system administrator.");
-                        }
-                    }
+                    //var studentToUpdate = await _context.Students.FirstOrDefaultAsync(s => s.ID == id);
+                    //if (await TryUpdateModelAsync<Student>(
+                    //    studentToUpdate, "", s => s.etatAccount))
+                    //{
+                    //    try
+                    //    {
+                    //        await _context.SaveChangesAsync();
+                    //        return RedirectToAction(nameof(Index));
+                    //    }
+                    //    catch (DbUpdateException /* ex */)
+                    //    {
+                    //        //Log the error (uncomment ex variable name and write a log.)
+                    //        ModelState.AddModelError("", "Unable to save changes. " +
+                    //            "Try again, and if the problem persists, " +
+                    //            "see your system administrator.");
+                    //    }
+                    //}
+                    var etaAccount = await _context.Students
+                     .FirstOrDefaultAsync(m => m.ID == id);
+                         etaAccount.etatAccount = true;
+
+
+                            _context.SaveChanges();
+
+
+
                 }
                 else
                 {
@@ -331,6 +362,8 @@ namespace PFE_Management.Controllers
 
 
         // create stage version 2 with iduser of Instructor
+        
+        [Authorize(Roles = "Student")]
         public async Task<IActionResult> CreateStage()
         {
             //PopulateInstructorsDropDownList();
@@ -342,7 +375,13 @@ namespace PFE_Management.Controllers
 
                 .AsNoTracking()
                 .FirstOrDefaultAsync(m => m.StudentIDhashed == idStudentStage);
-            ViewBag.ham9atna = stage.EtatStage;
+
+            try
+            {
+                ViewBag.ham9atna = stage.EtatStage;
+            }
+            catch { }
+
             if (stage != null)
             {
                 return View(stage);
@@ -370,6 +409,7 @@ namespace PFE_Management.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Student")]
         /*, Genre, GIN, CNE, Email,DateNaissance, Annee,Telephone, OrganismeDacceuil, EncadrantExterne, EmailEncadrantExterne,TelephoneEncadrantExterne, PosteEncadrantExterne, TitreStage, DescriptionStage, VilleStage, PaysStage, DateDebutStage, DateFinStage, DepartmentID,InstructorID*/
         public async Task<IActionResult> CreateStage(Stage stage)
         {
