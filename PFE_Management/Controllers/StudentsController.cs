@@ -314,28 +314,12 @@ namespace PFE_Management.Controllers
             return RedirectToAction("Index", "Students");
         }
 
-        // get stage view with all instructors 
-        //public IActionResult CreateStage()
-        //{
-        //    //PopulateInstructorsDropDownList();
-        //    PopulateDepartmentsDropDownList();
-        //    ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FirstMidName");
-        //    // var studentid = await _context.Students.FindAsync(id);
-        //    ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-
-        //    //ViewData["StudentIDhashed"] = userId;
-
-        //    return View();
-        //}
-
-
-
-        // create stage version 2 with iduser of Instructor
+        //get stage view with all instructors
         public IActionResult CreateStage()
         {
             //PopulateInstructorsDropDownList();
             PopulateDepartmentsDropDownList();
-            ViewData["InstructorID"] = new SelectList(_userManager., "ID", "FirstMidName");
+            ViewData["InstructorID"] = new SelectList(_context.Instructors, "ID", "FirstMidName");
             // var studentid = await _context.Students.FindAsync(id);
             ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
@@ -343,6 +327,22 @@ namespace PFE_Management.Controllers
 
             return View();
         }
+
+
+
+        // create stage version 2 with iduser of Instructor
+        //public IActionResult CreateStage()
+        //{
+        //    //PopulateInstructorsDropDownList();
+        //    PopulateDepartmentsDropDownList();
+        //    ViewData["InstructorID"] = new SelectList(_userManager, "ID", "FirstMidName");
+        //    // var studentid = await _context.Students.FindAsync(id);
+        //    ViewBag.userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        //    //ViewData["StudentIDhashed"] = userId;
+
+        //    return View();
+        //}
 
 
 
