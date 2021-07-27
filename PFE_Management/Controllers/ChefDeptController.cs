@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PFE_Management.Data;
 using PFE_Management.Models;
@@ -10,7 +9,6 @@ using System.Threading.Tasks;
 
 namespace PFE_Management.Controllers
 {
-    [Authorize(Roles = "Chef_Departement")]
     public class ChefDeptController : Controller
     {
         private readonly ApplicationDbContext _context;

@@ -27,7 +27,6 @@ namespace PFE_Management.Controllers
         }
 
         // GET: Instructors
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(int? id, int? courseID)
         {
             var viewModel = new InstructorIndexData();
@@ -74,7 +73,6 @@ namespace PFE_Management.Controllers
         }
 
         // GET: Instructors/Details/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -94,7 +92,6 @@ namespace PFE_Management.Controllers
 
         // GET: Instructors/Create
         // GET: Instructors/Create
-        [Authorize(Roles = "Admin")]
         public IActionResult Create()
         {
             var instructor = new Instructor();
@@ -106,7 +103,6 @@ namespace PFE_Management.Controllers
         // POST: Instructors/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Bind("FirstMidName,LastName,Email")] Instructor instructor, string[] selectedCourses)
         {
             if (selectedCourses != null)
@@ -129,7 +125,6 @@ namespace PFE_Management.Controllers
         }
 
         // GET: Instructors/Edit/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -172,7 +167,6 @@ namespace PFE_Management.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id, string[] selectedCourses)
         {
             if (id == null)
@@ -247,7 +241,6 @@ namespace PFE_Management.Controllers
 
 
         // GET: Instructors/Delete/5
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -294,7 +287,6 @@ namespace PFE_Management.Controllers
         // Register an Account for Instructor
 
         //Get for Register
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register(int? id)
         {
             if (id == null)
@@ -307,19 +299,11 @@ namespace PFE_Management.Controllers
             {
                 return NotFound();
             }
-            try
-            {
-
-                ViewBag.ham9atna = RegisterModel.etatAccount;
-            }
-            catch { }
-
             return View(RegisterModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Register(Instructor model, int? id)
         {
 
@@ -338,29 +322,23 @@ namespace PFE_Management.Controllers
                 if (result.Succeeded)
                 {
                     //Ici Pour Editer le champs Has Account to yes une fois l'Admin creer un compte pour cet Utilisateur
-                    //var instructorToUpdate = await _context.Instructors.FirstOrDefaultAsync(s => s.ID == id);
-                    //if (await TryUpdateModelAsync<Instructor>(
-                    //    instructorToUpdate, "", s => s.etatAccount))
-                    //{
-                    //    try
-                    //    {
-                    //        await _context.SaveChangesAsync();
-                    //        return RedirectToAction(nameof(Index));
-                    //    }
-                    //    catch (DbUpdateException /* ex */)
-                    //    {
-                    //        //Log the error (uncomment ex variable name and write a log.)
-                    //        ModelState.AddModelError("", "Unable to save changes. " +
-                    //            "Try again, and if the problem persists, " +
-                    //            "see your system administrator.");
-                    //    }
-                    //}
-                    var etaAccount = await _context.Instructors
-                    .FirstOrDefaultAsync(m => m.ID == id);
-                    etaAccount.etatAccount = true;
-
-
-                    _context.SaveChanges();
+                    var instructorToUpdate = await _context.Instructors.FirstOrDefaultAsync(s => s.ID == id);
+                    if (await TryUpdateModelAsync<Instructor>(
+                        instructorToUpdate, "", s => s.etatAccount))
+                    {
+                        try
+                        {
+                            await _context.SaveChangesAsync();
+                            return RedirectToAction(nameof(Index));
+                        }
+                        catch (DbUpdateException /* ex */)
+                        {
+                            //Log the error (uncomment ex variable name and write a log.)
+                            ModelState.AddModelError("", "Unable to save changes. " +
+                                "Try again, and if the problem persists, " +
+                                "see your system administrator.");
+                        }
+                    }
                 }
                 else
                 {
@@ -376,8 +354,6 @@ namespace PFE_Management.Controllers
         // mes stage + liste des de tous les stages + Details de chaque stage 
 
         // get all stages from the database :
-
-        [Authorize(Roles = "Instructor , Chef_Departement")]
         public async Task<IActionResult> AllStages()
         {
             var applicationDbContext = _context.Stages;
@@ -385,7 +361,6 @@ namespace PFE_Management.Controllers
         }
 
         // get and show details foreach stage
-        [Authorize(Roles = "Instructor , Chef_Departement , Student")]
         public async Task<IActionResult> DetailsStage(int? id)
         {
             if (id == null)
@@ -406,7 +381,7 @@ namespace PFE_Management.Controllers
         }
         [HttpGet]
 
-        [Authorize(Roles = "Instructor , Chef_Departement , Student")]
+
         public async Task<IActionResult> MesStagesAcces() 
         {
             
@@ -439,7 +414,7 @@ namespace PFE_Management.Controllers
         }
 
 
-        [Authorize(Roles = "Instructor , Chef_Departement , Student")]
+       
 
         public IActionResult MesStages()
         {
